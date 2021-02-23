@@ -1,0 +1,102 @@
+Montar una unidad externa:
+
+sudo mkdir /media/Directorio -> crear directorio
+sudo mount -t ntfs /dev/sdb1 /media/Directorio -> montar la unidad especificando el tipo de gestión de archivos que utilizamos
+
+Manejar repositorios software:
+sudo add-apt-repository ppa:user/ppa-name -> Añadir repositorios
+apt-get update-> Sincroniza la base de datos de paquetes de apt
+apt-get dist-upgrade-> Actualiza la distribución
+apt-get upgrade -> Actualiza todos los paquetes
+apt-get full-upgrade -> Actualiza y puede sustituir ciertos paquetes por otros mejores
+
+Comprobar el runlevel:
+$ runlevel -> Opcion 1
+$ who -r -> Opcion 2
+
+Configurar tu sistema para obtener un IP con DHCP
+# nano /etc/network/interfaces
+auto eth0
+iface eth0 inet dhcp
+
+Configure a static IP
+# nano /etc/network/interfaces
+auto eth0
+iface eth0 inet static
+address 192.168.0.100
+netmask 255.255.255.0
+gateway 192.168.0.1
+
+Comprobar si tienes FW activado
+sudo ufw status
+sudo iptables -L -> tablas
+
+Networking options in /proc
+En /proc/int/dev -> se encuentra información acerca de las interfaces de red que están configuradas
+/proc/net/arp -> Tablas ARP
+/proc/net/tcp
+/proc/net/netstat -> Network Statistics
+
+Obtener información sobre la memoria del dispositivo
+cat /proc/meminfo
+
+Comprobar la lista de puertos que tiene escuchando un dispositivo
+nmap -P0 192.168.0.X -> Para los puertos TCP
+nmap -P0 -sU 192.168.0.X -> Para los puertos UDP
+
+¿Cómo se montan CD?
+–mount /dev/cdrom /mnt/cdrom –t iso9660
+
+Compilar un kernel:
+1. Descargar www.kernel.org-> tar.gz.bz2
+2. Descomprimir en /usr/src/linux-XXX
+3. Configurar: make menuconfig y al guardar /usr/src/linux-XX.../.config
+5. Make clean
+6. Make zlilo
+7. Make modules
+8. Make modules_install
+9. mkinitrd
+10. Mover “vmlinuz” y System.map a /boot
+11. Actualizar fichero de arranque 
+
+syslog-> Se usa para enviar mensajes de eventos del sistema.
+
+Demonios-> Procesos que se ejecutan en segundo plano. /etc/init.d/
+/etc-> ficheros de configuración 
+/host-> Lista de nombres de máquinas y direcciones IP correspondientes, generalmente “importantes”
+
+Comandos:
+halt: Si usas el comando halt, detienes el uso de la CPU
+linuxconf: utilidad de configuración completa
+Xconfigurator: Configuración del entorno X Window
+route: configuración de las rutas de red (máscara, gateway), agregar o eliminar una ruta.
+ifconfig:  muestra información sobre las interfaces activas e inactivas 
+netstat: Estado de las conexiones de la máquina
+rpm: para instalar, actualizar o borrar paquetes rpm.
+dpkg: lo mismo pero para ficheros .deb
+yum: es una interfaz de alto nivel para instalar ficheros rpm junto con sus dependencias.
+Adduser: Añadir usuario
+Userdel: borra una cuenta de usuario y sus archivos relacionados
+usermod: modifica la cuenta de un usuario.
+Groupadd: crea un nuevo grupo
+groupdel: Borrar un grupo.
+quota: Siendo root puedes ver el uso de cuotas de cualquier usuario.
+edquota: para administrar las cuotas de cada usuario edquota
+
+Preguntas examen:
+mv /ruta/directorio /ruta/directorio_renombrado -> renombrado directorio
+useradd -m -g usuarios sara -> añadir usuario y añadir a un grupo
+fdisk -> manipular la tabla de particiones del disco 
+du -> estimate file space usage
+df -> el espacio del disco que esta usando el file system
+dpkg -l > test.txt -> meter en un fichero los paquetes instalados
+> dmesg | grep -i usb -> listar la salida de los mensajes del kernel de usb
+chmod -> cambiar permisos
+chown usuarioNuevo archivo ->para cambiar el propietario
+chown -R usuarioNuevo directorio ->para cambiar el propietario de un directorio
+Modifica el etc/Network/interfaces-> con un editor de texto, para que los cambios sean actualizados hace falta ejecutar el comando /etc/init.d/networking restart.
+mount server:/directory/with/data /mnt-> Montar recursos NFS en un servidor con una dirección IP
+Reiniciar servidor Apache-> sudo apachectl restart
+
+
+
